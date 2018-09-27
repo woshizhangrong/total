@@ -1,0 +1,80 @@
+thead {
+	background-color: rgb(62, 98, 165);
+	color: rgb(255, 255, 255);
+}
+.form{
+	background-color:rgb(255,255,255);
+	margin-left: 40px;
+	width: 95%;
+	border-radius:13px;
+	height: 90%;
+	position:absolute;
+}
+.title{
+	margin-left: 63px;
+	color:#FFFFFF;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+#div1{
+	width: 41px;
+	border-bottom: 1px solid white;
+	margin-bottom: 1px;
+}
+.img-circle{
+	height: 85px;
+	width: 85px;
+	margin-left: 85px;
+	margin-top: 40px;
+	margin-bottom: 32px; 
+	box-shadow: 0.1em 0.1em 9px 0px rgba(0,0,0,40);
+}
+.form1{
+	width: 255px;
+	height: 100%;
+	border-radius:13px;
+}
+.easyui-tabs{
+	position:absolute;
+	left:295px;
+	top:0px;
+	width:75% !important;
+	height:99.5% !important;
+	border-radius:13px;
+}
+.nav {
+	background-color: rgb(255,255,255);
+}
+
+.nav ul {
+	margin: 0;padding: 0;
+	list-style-type: none;
+	line-height: 40px;
+}
+
+.nav a {
+	display: block;
+	text-decoration: none;
+	background-color:rgb(255,255,255);
+	color: #4d4d4d;
+	font-size: 14px;
+}
+.nav a:hover {
+	background-color: #dedede;
+	color:#3e625a;
+}
+.tab_body {
+	display: none;
+}
+.tab_body a{
+	margin-left: 58px;
+}
+.tab_body li{
+	color: #4d4d4d;
+}
+.tab_body li:hover{
+	background-color: #dedede;
+	color:#3e625a;
+	width: 255px;
+}
+
