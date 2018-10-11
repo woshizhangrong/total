@@ -1,0 +1,19 @@
+var photos= {
+  "title": "", //相册标题
+  "id": 123, //相册id
+  "start": 0, //初始显示的图片序号，默认0
+  "data": [   //相册包含的图片，数组格式
+    {
+      "alt": "close",
+      "pid": 1, //图片id
+      "src": "images/close.png", //原图地址
+      "thumb": "images/close.png" //缩略图地址
+    }
+	    {
+      "alt": "left",
+      "pid": 2, //图片id
+      "src": "images/left.png", //原图地址
+      "thumb": "images/left.png" //缩略图地址
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>举报类型</title>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reportType.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/reportType.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="layer/layer.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="tree">
+        <table>
+            <tr>
+                <td id="d1">
+                    <div style="float:left;">
+                        <input type="checkbox" id="1" onclick="a1()" value="世界军人运动会专项知识产权保护类" title="checkbox">
+                    </div>
+                    <div style="float: left;" onclick="mi1();">
+                        <img src="images/shou.png" id="i1"  style="width: 20px;height: 20px;float: left;">世界军人运动会专项知识产权保护类
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d11" style="display: none;">
+                    <div style="float:left;">
+                        <input type="checkbox" id="11" onclick="a11()" value="名称类" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 40px;" onclick="mi11()">
+                        <img src="images/shou.png" id="i11"  style="width: 20px;height: 20px;float: left;">名称类
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d12" style="display: none;">
+                    <div style="float:left;">
+                        <input id="12" onclick="a12()" type="checkbox" value="缩写类" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 40px;" onclick="mi12()">
+                        <img src="images/shou.png" id="i12"  style="width: 20px;height: 20px;float: left;">缩写类
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d121" style="display: none;">
+                    <div style="float:left;">
+                        <input id="121" onclick="a121()" type="checkbox" value="其他世界军人运动会专有表达词汇缩写符号" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 80px;" onclick="mi121();">
+                        其他世界军人运动会专有表达词汇缩写符号
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d13" style="display: none;">
+                    <div style="float:left;">
+                        <input id="13" onclick="a13()" type="checkbox" value="格言/口号类" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 40px;" onclick="mi13()">
+                        <img src="images/shou.png" id="i13"  style="width: 20px;height: 20px;float: left;">格言/口号类
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d14" style="display: none;">
+                    <div style="float:left;">
+                        <input id="14" onclick="a14()" type="checkbox" value="网络知识产权类" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 40px;" onclick="mi14()">
+                        <img src="images/shou.png" id="i14"  style="width: 20px;height: 20px;float: left;">网络知识产权类
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d15" style="display: none;">
+                    <div style="float:left;">
+                        <input id="15" onclick="a15()" type="checkbox" value="其他" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 40px;" onclick="mi15()">
+                        <img src="images/shou.png" id="mi15"  style="width: 20px;height: 20px;float: left;">其他
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d16" style="display: none;">
+                    <div style="float:left;">
+                        <input id="16" onclick="a16()" type="checkbox" value="标志/标识类" title="checkbox">
+                    </div>
+                    <div style="float: left;margin-left: 40px;" onclick="mi16()">
+                        <img src="images/shou.png" id="i16"  style="width: 20px;height: 20px;float: left;">标志/标识类
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="d2">
+                    <div style="float:left;">
+                        <input type="checkbox" id="2" onclick="a2()" value="一般知识产权保护类" title="checkbox">
+                    </div>
+                    <div style="float: left;" onclick="mi2()">
+                        <img src="images/shou.png" id="i2"  style="width: 20px;height: 20px;float: left;">一般知识产权保护类
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <button type="button" style="background-color:rgb(62,98,165);width:100px;margin-top: 20px;margin-bottom: 40px;" class="btn btn-primary" onclick="myClick()">确定</button>
+</div>
+<script>
+    function myClick() {
+        alert("right!");
+    }
+    function a1() {
+        var x1=document.getElementById('1');
+        var x11=document.getElementById('11');
+        var x12=document.getElementById('12');
+        var x121=document.getElementById('121');
+        var x13=document.getElementById('13');
+        var x14=document.getElementById('14');
+        var x15=document.getElementById('15');
+        var x16=document.getElementById('16');
+        if(x1.checked == true){
+            x11.checked=true;
+            x12.checked=true;
+            x121.checked=true;
+            x13.checked=true;
+            x14.checked=true;
+            x15.checked=true;
+            x16.checked=true;
+        }
+        else{
+            x11.checked=false;
+            x12.checked=false;
+            x121.checked=false;
+            x13.checked=false;
+            x14.checked=false;
+            x15.checked=false;
+            x16.checked=false;
+        }
+    }
+    function a12() {
+        var x12=document.getElementById('12');
+        var x121=document.getElementById('121');
+        if(x12.checked == true){
+            x121.checked=true;
+        }
+        else{
+            x121.checked=false;
+        }
+    }
+    function mi1() {
+        var img1 = document.getElementById("i1");
+        var t11 = document.getElementById("d11");
+        var t12 = document.getElementById("d12");
+        var t13 = document.getElementById("d13");
+        var t14 = document.getElementById("d14");
+        var t15 = document.getElementById("d15");
+        var t16 = document.getElementById("d16");
+        var t121 = document.getElementById("d121");
+        if(t11.style.display == "none")
+        {
+            t11.style.display = "block";
+            t12.style.display = "block";
+            t13.style.display = "block";
+            t14.style.display = "block";
+            t15.style.display = "block";
+            t16.style.display = "block";
+            img1.src = "images/fang.png";
+        }
+        else{
+            t11.style.display = "none";
+            t12.style.display = "none";
+            t13.style.display = "none";
+            t14.style.display = "none";
+            t15.style.display = "none";
+            t16.style.display = "none";
+            t121.style.display = "none";
+            img1.src = "images/shou.png";
+        }
+    }
+    function mi12() {
+        var t1=document.getElementById("d121");
+        // var img=document.getElementById("i12");
+        if(t1.style.display == "none"){
+            t1.style.display = "block";
+            // img1.src = "images/fang.png";
+        }else{
+            t1.style.display = "block";
+            // img1.src = "images/shou.png";
+        }
+    }
+</script>
+</body>
+</html>

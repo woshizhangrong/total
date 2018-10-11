@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layer-更懂你的web弹窗解决方案</title>
+  <script src="http://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+  <script src="layer/layer.js"></script>
+</head>
+<body>
+<div id="layer-photos-demo" class="layer-photos-demo" >
+  <img layer-pid="" layer-src="images/close.png"   src="images/close.png" alt="close">
+  <img layer-pid="" layer-src="images/left.png"   src="images/left.png" alt="left">
+</div>
+ 
+<script>
+layer.photos({
+  photos: '#layer-photos-demo'
+  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+}); 
+
+//调用示例
+
+<!-- !function(){ -->
+            <!-- $('#layer-photos-demo').on('click',function(){ -->
+                <!-- layer.photos({ -->
+  <!-- photos: '#layer-photos-demo' -->
+  <!-- ,anim: 2 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数） -->
+<!-- });  -->
+            <!-- }); -->
+        <!-- }(); -->
+</script>
+</body>
+</html>
