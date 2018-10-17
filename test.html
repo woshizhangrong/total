@@ -1,35 +1,182 @@
-
-
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html>
 <head>
   <meta charset="utf-8">
-  <title>layer-更懂你的web弹窗解决方案</title>
-  <script src="http://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
-  <script src="layer/layer.js"></script>
+  <title>test</title>
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+  <script>
+      $(document).ready(function() {
+	  
+          $('#example').dataTable
+          ( {"columns": [
+                  { "width": "4.4%" },
+                  { "width": "31.1%" },
+                  { "width": "26.8%" },
+                  { "width": "8.7%" },
+                  { "width": "13%" },
+                  { "width": "15.4%" }
+              ],
+              // "searching": false,
+              "dom": '<"top"f>rt<"bottom"lip><"clear">',
+              "scrollY": "400px",
+              "scrollX": "false",
+              "autoWidth":"false",
+              "scrollCollapse": "true",
+              "paging": "false",
+              "language": {
+                  "lengthMenu": "每页 _MENU_ 条记录",
+                  "zeroRecords": "没有找到记录",
+                  "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                  "infoEmpty": "无记录",
+                  "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                  "sSearch":"查找",
+                  "oPaginate": {
+                      "sPrevious": "上页",
+                      "sNext": "下页"},
+              }, initComplete: function () {
+                  var api = this.api();
+                  api.columns().indexes().flatten().each( function ( i ) {
+                      var column = api.column( i );
+                      var select = $('<select><option value=""></option></select>')
+                          .appendTo( $(column.footer()).empty() )
+                          .on( 'change', function () {
+                              var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                              column
+                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .draw();
+                          } );
+                      column.data().unique().sort().each( function ( d, j ) {select.append( '<option value="'+d+'">'+d+'</option>' )
+                      } );
+                  } );
+              }
+          } );
+$.fn.dataTable.ext.search.push(
+			function( settings, data, dataIndex ) {
+              var min = new Date( $('#min').val() );
+			  var max = new Date( $('#max').val() );
+              var age = new Date( data[5] ); // use data for the age column
+
+              if ( ( isNaN( min ) && isNaN( max ) ) ||
+                  ( isNaN( min ) && age <= max ) ||
+                  ( min <= age   && isNaN( max ) ) ||
+                  ( min <= age   && age <= max ) )
+              {
+                  return true;
+              }
+              return false;
+          }); 
+			var table = $('#example').DataTable();
+          // Event listener to the two range filtering inputs to redraw on input
+          $('#min, #max').keyup( function() {
+              table.draw();
+          } );
+      });
+  </script>
 </head>
 <body>
-<div id="layer-photos-demo" class="layer-photos-demo" >
-  <img layer-pid="" layer-src="images/close.png"   src="images/close.png" alt="close">
-  <img layer-pid="" layer-src="images/left.png"   src="images/left.png" alt="left">
-</div>
- 
+<p id="c1" onclick="c1()">click默认开始时间</p>
+<p id="c2" onclick="c2()">click默认结束时间</p> 
 <script>
-layer.photos({
-  photos: '#layer-photos-demo'
-  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-}); 
+      function c1(){		
+		document.getElementById('min').value="2011/04/04";			
+      }
+	  function c2(){
+         document.getElementById('max').value="2011/09/09";
+      }
+  </script> 
+<p>
+  输入一组时间范围形式(20XX/xx/xx)：
+</p>
+<table border="0" cellspacing="5" cellpadding="5">
+  <tbody><tr>
+    <td>开始时间:</td>
+    <td><input type="text" id="min" name="min"></td>
+  </tr>
+  
+  <tr>
+    <td>截止时间:</td>
+    <td><input type="text" id="max" name="max"></td>
+  </tr>
+  </tbody>
+</table>
+<table id="example" class="display table table-bordered table-striped table-hover dataTable" style="width:100%;" >
+  <thead style="background-color:#3e62a5;color:white;">
+  <tr>
+    <th style="text-align:center;">id</th>
+    <th style="text-align:center;">举报类型</th>
+    <th style="text-align:center;">举报地址</th>
+    <th style="text-align:center;">辅助图片</th>
+    <th style="text-align:center;">举报IP</th>
+    <th style="text-align:center;">举报时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>1</td>
+    <td>System Architect</td>
+    <td>Edinburgh</td>
+    <td><a href="#" id="tup1">查看图片</a>
+    </td>
+    <td>$320,800</td>
+    <td>2011/04/25</td>
 
-//调用示例
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Accountant</td>
+    <td>Tokyo</td>
+    <td>63</td><td>$170,750</td>
+    <td>2011/07/25</td>
 
-<!-- !function(){ -->
-            <!-- $('#layer-photos-demo').on('click',function(){ -->
-                <!-- layer.photos({ -->
-  <!-- photos: '#layer-photos-demo' -->
-  <!-- ,anim: 2 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数） -->
-<!-- });  -->
-            <!-- }); -->
-        <!-- }(); -->
-</script>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Junior Technical Author</td>
+    <td>San Francisco</td>
+    <td>66</td><td>$86,000</td>
+    <td>2009/01/12</td>
+
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Senior Javascript Developer</td>
+    <td>Edinburgh</td>
+    <td>22</td><td>$433,060</td>
+    <td>2012/03/29</td>
+
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Accountant</td>
+    <td>Tokyo</td>
+    <td>33</td><td>$162,700</td>
+    <td>2008/11/28</td>
+
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Integration Specialist</td>
+    <td>New York</td>
+    <td>61</td><td>$372,000</td>
+    <td>2012/12/02</td>
+
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Sales Assistant</td>
+    <td>San Francisco</td>
+    <td>59</td><td>$137,500</td>
+    <td>2012/08/06</td>
+
+  </tr>
+  </tbody>
+</table>
+<div class="bottom" ></div>
+<div class="clear"></div>
 </body>
 </html>

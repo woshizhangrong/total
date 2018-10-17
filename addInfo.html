@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新建服务专员信息</title>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reportType.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/reportType.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+    body .form-control{
+        height: 27px;
+        width: 320px;
+    }
+    body .btn{
+        height: 27px;
+        width: 197px;
+        padding: 0px;
+    }
+
+</style>
+<form>
+    <div style="margin-top: 50px">
+        <table style=" border-collapse:separate;border-spacing:18px;margin-left: 10%;">
+            <tr style="margin-bottom: 18px;">
+                <th style="float: right;width: 101px;"><span style="color: red;">*</span>&nbsp&nbsp 保护项目名称</th>
+                <th><input type="text" class="form-control" id="myname"></th>
+            </tr>
+            <tr>
+                <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 是否启用</th>
+                <th><input type="checkbox" checked="checked"></th>
+            </tr>
+        </table>
+        <button type="button" onclick="myCheck();" id="ok" class="btn btn-primary" style="width: 123px;height: 38px;float: right;margin-right: 50px">保存</button>
+        <script>
+            function myCheck() {
+                if(document.getElementById('myname').value == "")
+                {
+                    alert('请输入保护项目名称!');
+                }
+                else{
+                    $(function(){
+                        var str=window.location.href;
+                        $('myname').val(str.split('?')[1]);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        // parent.setRel(document.getElementById('myname').value);
+                        parent.layer.close(index);
+                    });
+                }
+            }
+        </script>
+    </div>
+</form>
+</body>
+</html>

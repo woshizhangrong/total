@@ -6,14 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link href="css/table.css" rel="stylesheet" type="text/css" />
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/easyui.css">
 	<link rel="stylesheet" type="text/css" href="css/icon.css">
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-	<script src="js/layer.js"></script>
-	<script src="js/layer.js"></script>
+	<script src="layer/layer.js"></script>
 </head>
 <body background="images/bg2.png" style="overflow:hidden;background-repeat:no-repeat ;background-size:100% 100%;background-attachment: fixed;">
 <div class="title">
@@ -25,7 +23,57 @@
 </div>
 <div class="form">
 	<div class="form1">
-		<img src="images/bg2.png" class="img-circle" >
+		<img id="pic" src="images/bg2.png" class="img-circle" >
+		<input id="upload" name="file" accept="image/*" type="file" style="display: none">
+		<script>
+            $(function() {
+                $("#pic").click(function() {
+                    $("#upload").click(); //隐藏了input:file样式后，点击头像就可以本地上传         
+                    $("#upload").on("change", function() {
+                        var objUrl = getObjectURL(this.files[0]); //获取图片的路径，该路径不是图片在本地的路径
+                        if (objUrl) {
+                            $("#pic").attr("src", objUrl); //将图片路径存入src中，显示出图片
+                            upimg();
+                        }
+                    });
+                });
+            });  //建立一?可存取到?file的url
+            function getObjectURL(file) {
+                var url = null;
+                if (window.createObjectURL != undefined) { // basic
+                    url = window.createObjectURL(file);
+                } else if (window.URL != undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file);
+                } else if (window.webkitURL != undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url;  }  //上传头像到服务器
+            function upimg() {
+                console.log(344)
+                var pic = $('#upload')[0].files[0];
+                var file = new FormData();
+                file.append('image', pic);
+                $.ajax({
+                    url: "/uploadImg",
+                    type: "post",
+                    data: file,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        console.log(data);
+                        var res = data;
+                        $("#resimg").append("<img src='/" + res + "'>")
+                    }
+                });
+                function setRel(rel){
+                    this.rel=rel;
+                }
+                function getRel(){
+                    return rel;
+                }
+            }
+		</script>
 		<div class="nav">
 			<ul>
 				<li><a href="#" onclick="show();" >
@@ -47,9 +95,9 @@
 					<img id="i3" src="images/left.png" style="margin-left:104px;width: 14px;">
 				</a></li>
 				<ul class="tab_body" id="tab_body3">
-					<li><a href="#" onclick="addTab('律所管理','https://www.baidu.com/')" >律所管理</a></li>
-					<li><a href="#" onclick="addTab('举报类别管理','https://www.baidu.com')">举报类别管理</a> </li>
-					<li><a href="#" onclick="addTab('服务专员管理','https://www.baidu.com')">服务专员管理</a></li>
+					<li><a href="#" onclick="addTab('律所管理','2.html')" >律所管理</a></li>
+					<li><a href="#" onclick="addTab('举报类别管理','3.html')">举报类别管理</a> </li>
+					<li><a href="#" onclick="addTab('服务专员管理','4.html')">服务专员管理</a></li>
 				</ul>
 			</ul>
 			<script type="text/javascript" src="js/table.js"></script>

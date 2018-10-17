@@ -1,0 +1,31 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layer-更懂你的web弹窗解决方案</title>
+  <script src="http://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+  <script src="layer/layer.js"></script>
+  <script>	 
+  function load(){ 
+  //下面两种方法效果是一样的 
+  document.getElementById("layer-photos-demo1").click();
+} </script>
+</head>
+<body onload="load()" >
+
+<div id="layer-photos-demo" class="layer-photos-demo" style="display:none" >
+  <img id="layer-photos-demo1" layer-pid="" layer-src="images/close.png"  src="images/close.png" alt="close">
+  <img layer-pid="" layer-src="images/left.png" src="images/left.png" alt="left">
+</div>
+<script src="layer/jquery-1.8.3.min.js"></script>
+<script src="layer/layer.js"></script>
+<script>
+layer.photos({
+         photos: '#layer-photos-demo'
+		  ,anim: 5
+     });
+</script>
+</body>
+</html>

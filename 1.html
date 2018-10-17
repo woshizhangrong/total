@@ -3,11 +3,18 @@
 <head>
     <meta charset="utf-8">
     <title>文档标题</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="css/normalize3.0.2.min.css" />
+    <link href="css/mobiscroll.css" rel="stylesheet" />
+    <link href="css/mobiscroll_date.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/layer.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/layer.js"></script>
+    <script src="layer/layer.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
     <script>
@@ -21,8 +28,9 @@
                     { "width": "13%" },
                     { "width": "15.4%" }
                 ],
+                "searching": false,
 				"dom": '<"top"f>rt<"bottom"lip><"clear">',
-                "scrollY": "400px",
+                "scrollY": "350px",
 				"scrollX": "false",
 				"autoWidth":"false",
                 "scrollCollapse": "true",
@@ -33,10 +41,12 @@
                  "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
                  "infoEmpty": "无记录",
                  "infoFiltered": "(从 _MAX_ 条记录过滤)",
-				 "previous":"上一页",
-				 "next":"下一页"
-             },
-                initComplete: function () {
+                    "sSearch":"查找",
+                    "oPaginate": {
+                        "sPrevious": "上页",
+                        "sNext": "下页"
+                    },
+             }, initComplete: function () {
             var api = this.api();
             api.columns().indexes().flatten().each( function ( i ) {
                 var column = api.column( i );
@@ -61,29 +71,133 @@
 </head>
 
 <body>
+<div id="layer-photos-demo" class="layer-photos-demo" style="display: none" >
+    <img id="layer-photos-demo1" layer-pid="" layer-src="images/close.png"  src="images/close.png" alt="close">
+    <img layer-pid="" layer-src="images/left.png" src="images/left.png" alt="left">
+</div>
+<script>
+    layer.photos({
+        photos: '#layer-photos-demo',
+        anim: 2,
+    });
+</script>
 <div class="platform" style="margin-top:20px;margin-left:40px;">
-    <div class="top">
-        <div >
-            <a id="c1" >click</a>
-            <script>
-            !function(){
-                    $('#c1').on('click',function(){
-                            layer.open({
-                               type: 2,
-                               title: '',
-                               maxmin: true,
-                               area: ['800px', '500px'],
-                               content: 'https://www.baidu.com',
-                           });
-                    });
-                }();
-            </script>
-            <!--<select id="fstyle">-->
-                <!--<option value="" disabled selected>请选择系统：</option>-->
-
-            <!--</select>-->
-        </div>
+<div class="head" style="width: 933px;padding-bottom:20px;margin-top: 40px;margin-bottom:30px;font-size: 15px;">
+    <div class="input-group" style="float:left;height: 25px;width: 225px;margin-right: 15px;">
+        <style>
+            body .input-group-addon{
+                background: #FFFFFF;
+                border-right: none;
+                padding: 0px;
+            }
+            body .form-control{
+                border-radius: 0px;
+                height: 25px;
+            }
+        </style>
+        <span class="input-group-addon"><img src="images/search.png" style="height: 16px;width: 16px"></span>
+        <input type="text" class="form-control" style="border-left:none;font-size: 15px" placeholder="请输入关键词">
     </div>
+    <select id="c1" style="float: left;border: 1px solid #ccc;width:98px;height: 25px;margin-right: 15px;color:rgb(117,117,117);">
+        <option  value="举报类型">举报类型</option>
+    </select>
+    <script>
+        !function(){
+            $('#c1').on('click',function(){
+                layer.open({
+                    type: 2,
+                    title:'举报类型',
+                    area: ['500px', '400px'],
+                    content: 'reportType.html',
+                    maxmin: true,
+                    shadeClose:true,
+                    fixed:false,
+                    zIndex: layer.zIndex,
+                    closeBtn: 1
+                });
+            });
+        }();
+    </script>
+    <input style="float: left;height: 25px;margin-right: 15px;" type="text" onclick="mytime1()" name="USER_AGE1" id="USER_AGE1" readonly class="input" placeholder="举报起始时间" />
+    <input style="float: left;height: 25px;margin-right: 15px;" type="text" onclick="mytime2()" name="USER_AGE2" id="USER_AGE2" readonly class="input" placeholder="举报截止时间" />
+    <script src="js/mobiscroll_date.js" charset="gb2312"></script>
+    <script src="js/mobiscroll.js"></script>
+    <script type="text/javascript">
+        !function () {
+            $('#USER_AGE1').on('click',function() {
+                var currYear = (new Date()).getFullYear();
+                var opt = {};
+                opt.date = {preset: 'date'};
+                opt.datetime = {preset: 'datetime'};
+                opt.time = {preset: 'time'};
+                opt.default = {
+                    theme: 'android-ics light', //皮肤样式
+                    display: 'modal', //显示方式
+                    mode: 'scroller', //日期选择模式
+                    dateFormat: 'yyyy-mm-dd',
+                    lang: 'zh',
+                    showNow: true,
+                    nowText: "今天",
+                    startYear: currYear - 50, //开始年份
+                    endYear: currYear + 10 //结束年份
+                };
+
+                $("#USER_AGE1").mobiscroll($.extend(opt['date'], opt['default']));
+            });
+        }();
+        !function () {
+            $('#USER_AGE2').on('click',function() {
+                var currYear = (new Date()).getFullYear();
+                var opt = {};
+                opt.date = {preset: 'date'};
+                opt.datetime = {preset: 'datetime'};
+                opt.time = {preset: 'time'};
+                opt.default = {
+                    theme: 'android-ics light', //皮肤样式
+                    display: 'modal', //显示方式
+                    mode: 'scroller', //日期选择模式
+                    dateFormat: 'yyyy-mm-dd',
+                    lang: 'zh',
+                    showNow: true,
+                    nowText: "今天",
+                    startYear: currYear - 50, //开始年份
+                    endYear: currYear + 10 //结束年份
+                };
+
+                $("#USER_AGE2").mobiscroll($.extend(opt['date'], opt['default']));
+            });
+        }();
+
+        //
+        // $.fn.dataTable.ext.search.push(
+        //     function( settings, data, dataIndex ) {
+        //         var start = parseInt( $('#USER_AGE1').val(), 10 );
+        //         var end = parseInt( $('#USER_AGE2').val(), 10 );
+        //         var date = parseFloat( data[5] ) || 0; // use data for the age column
+        //
+        //         if ( ( isNaN( start ) && isNaN( end ) ) ||
+        //             ( isNaN( start ) && age <= end ) ||
+        //             ( start <= date   && isNaN( end ) ) ||
+        //             ( start <= date   && date <= end ) )
+        //         {
+        //             return true;
+        //         }
+        //         return false;
+        //     }
+        // );
+        // $(document).ready(function() {
+        //     var table = $('#example').DataTable();
+        //
+        //     // Event listener to the two range filtering inputs to redraw on input
+        //     $('#start, #end').keyup( function() {
+        //         table.draw();
+        //     } );
+        // } );
+        </script>
+    <div id="myButtons1" class="bs-example" style="float: left;">
+        <button type="button" class="btn btn-primary" style="height: 25px;padding: 0px;width: 54px">查找</button>
+    </div>
+</div>
     <table id="example" class="display table table-bordered table-striped table-hover dataTable" style="width:100%;" >
         <thead style="background-color:#3e62a5;color:white;">
         <tr>
@@ -100,457 +214,128 @@
             <td>1</td>
             <td>System Architect</td>
             <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
+            <td><a href="#" id="tup1">查看图片</a>
+                <script>
+                    $('#tup1').on('click',function(){
+                        document.getElementById("layer-photos-demo1").click();
+                });
+                </script>
+            </td>
             <td>$320,800</td>
+            <td>2011/04/25</td>
+
         </tr>
         <tr>
             <td>2</td>
             <td>Accountant</td>
             <td>Tokyo</td>
-            <td>63</td>
+            <td>63</td><td>$170,750</td>
             <td>2011/07/25</td>
-            <td>$170,750</td>
+
         </tr>
         <tr>
             <td>3</td>
             <td>Junior Technical Author</td>
             <td>San Francisco</td>
-            <td>66</td>
+            <td>66</td><td>$86,000</td>
             <td>2009/01/12</td>
-            <td>$86,000</td>
+
         </tr>
         <tr>
             <td>4</td>
             <td>Senior Javascript Developer</td>
             <td>Edinburgh</td>
-            <td>22</td>
+            <td>22</td><td>$433,060</td>
             <td>2012/03/29</td>
-            <td>$433,060</td>
+
         </tr>
         <tr>
             <td>5</td>
             <td>Accountant</td>
             <td>Tokyo</td>
-            <td>33</td>
+            <td>33</td><td>$162,700</td>
             <td>2008/11/28</td>
-            <td>$162,700</td>
+
         </tr>
         <tr>
             <td>6</td>
             <td>Integration Specialist</td>
             <td>New York</td>
-            <td>61</td>
+            <td>61</td><td>$372,000</td>
             <td>2012/12/02</td>
-            <td>$372,000</td>
+
         </tr>
         <tr>
             <td>7</td>
             <td>Sales Assistant</td>
             <td>San Francisco</td>
-            <td>59</td>
+            <td>59</td><td>$137,500</td>
             <td>2012/08/06</td>
-            <td>$137,500</td>
+
         </tr>
         <tr>
             <td>8</td>
             <td>Integration Specialist</td>
             <td>Tokyo</td>
-            <td>55</td>
+            <td>55</td><td>$327,900</td>
             <td>2010/10/14</td>
-            <td>$327,900</td>
+
         </tr>
         <tr>
             <td>9</td>
             <td>Javascript Developer</td>
             <td>San Francisco</td>
-            <td>39</td>
+            <td>39</td><td>$205,500</td>
             <td>2009/09/15</td>
-            <td>$205,500</td>
+
         </tr>
         <tr>
             <td>10</td>
             <td>Software Engineer</td>
             <td>Edinburgh</td>
-            <td>23</td>
+            <td>23</td><td>$103,600</td>
             <td>2008/12/13</td>
-            <td>$103,600</td>
+
         </tr>
         <tr>
             <td>11</td>
             <td>Office Manager</td>
             <td>London</td>
-            <td>30</td>
+            <td>30</td><td>$90,560</td>
             <td>2008/12/19</td>
-            <td>$90,560</td>
+
         </tr>
         <tr>
             <td>12</td>
             <td>Support Lead</td>
             <td>Edinburgh</td>
-            <td>22</td>
+            <td>22</td><td>$342,000</td>
             <td>2013/03/03</td>
-            <td>$342,000</td>
+
         </tr>
         <tr>
             <td>13</td>
             <td>Regional Director</td>
             <td>San Francisco</td>
-            <td>36</td>
+            <td>36</td><td>$470,600</td>
             <td>2008/10/16</td>
-            <td>$470,600</td>
+
         </tr>
         <tr>
             <td>14</td>
             <td>Senior Marketing Designer</td>
             <td>London</td>
-            <td>43</td>
+            <td>43</td><td>$313,500</td>
             <td>2012/12/18</td>
-            <td>$313,500</td>
+
         </tr>
         <tr>
             <td>15</td>
             <td>Regional Director</td>
             <td>London</td>
-            <td>19</td>
+            <td>19</td><td>$385,750</td>
             <td>2010/03/17</td>
-            <td>$385,750</td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>Marketing Designer</td>
-            <td>London</td>
-            <td>66</td>
-            <td>2012/11/27</td>
-            <td>$198,500</td>
-        </tr>
-        <tr>
-            <td>17</td>
-            <td>Chief Financial Officer (CFO)</td>
-            <td>New York</td>
-            <td>64</td>
-            <td>2010/06/09</td>
-            <td>$725,000</td>
-        </tr>
-        <tr>
-            <td>18</td>
-            <td>Systems Administrator</td>
-            <td>New York</td>
-            <td>59</td>
-            <td>2009/04/10</td>
-            <td>$237,500</td>
-        </tr>
-        <tr>
-            <td>19</td>
-            <td>Software Engineer</td>
-            <td>London</td>
-            <td>41</td>
-            <td>2012/10/13</td>
-            <td>$132,000</td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>Personnel Lead</td>
-            <td>Edinburgh</td>
-            <td>35</td>
-            <td>2012/09/26</td>
-            <td>$217,500</td>
-        </tr>
-        <tr>
-            <td>21</td>
-            <td>Development Lead</td>
-            <td>New York</td>
-            <td>30</td>
-            <td>2011/09/03</td>
-            <td>$345,000</td>
-        </tr>
-        <tr>
-            <td>22</td>
-            <td>Chief Marketing Officer (CMO)</td>
-            <td>New York</td>
-            <td>40</td>
-            <td>2009/06/25</td>
-            <td>$675,000</td>
-        </tr>
-        <tr>
-            <td>23</td>
-            <td>Pre-Sales Support</td>
-            <td>New York</td>
-            <td>21</td>
-            <td>2011/12/12</td>
-            <td>$106,450</td>
-        </tr>
-        <tr>
-            <td>24</td>
-            <td>Sales Assistant</td>
-            <td>Sidney</td>
-            <td>23</td>
-            <td>2010/09/20</td>
-            <td>$85,600</td>
-        </tr>
-        <tr>
-            <td>25</td>
-            <td>Chief Executive Officer (CEO)</td>
-            <td>London</td>
-            <td>47</td>
-            <td>2009/10/09</td>
-            <td>$1,200,000</td>
-        </tr>
-        <tr>
-            <td>26</td>
-            <td>Developer</td>
-            <td>Edinburgh</td>
-            <td>42</td>
-            <td>2010/12/22</td>
-            <td>$92,575</td>
-        </tr>
-        <tr>
-            <td>27</td>
-            <td>Regional Director</td>
-            <td>Singapore</td>
-            <td>28</td>
-            <td>2010/11/14</td>
-            <td>$357,650</td>
-        </tr>
-        <tr>
-            <td>28</td>
-            <td>Software Engineer</td>
-            <td>San Francisco</td>
-            <td>28</td>
-            <td>2011/06/07</td>
-            <td>$206,850</td>
-        </tr>
-        <tr>
-            <td>29</td>
-            <td>Chief Operating Officer (COO)</td>
-            <td>San Francisco</td>
-            <td>48</td>
-            <td>2010/03/11</td>
-            <td>$850,000</td>
-        </tr>
-        <tr>
-            <td>30</td>
-            <td>Regional Marketing</td>
-            <td>Tokyo</td>
-            <td>20</td>
-            <td>2011/08/14</td>
-            <td>$163,000</td>
-        </tr>
-        <tr>
-            <td>31</td>
-            <td>Integration Specialist</td>
-            <td>Sidney</td>
-            <td>37</td>
-            <td>2011/06/02</td>
-            <td>$95,400</td>
-        </tr>
-        <tr>
-            <td>32</td>
-            <td>Developer</td>
-            <td>London</td>
-            <td>53</td>
-            <td>2009/10/22</td>
-            <td>$114,500</td>
-        </tr>
-        <tr>
-            <td>33</td>
-            <td>Technical Author</td>
-            <td>London</td>
-            <td>27</td>
-            <td>2011/05/07</td>
-            <td>$145,000</td>
-        </tr>
-        <tr>
-            <td>34</td>
-            <td>Team Leader</td>
-            <td>San Francisco</td>
-            <td>22</td>
-            <td>2008/10/26</td>
-            <td>$235,500</td>
-        </tr>
-        <tr>
-            <td>35</td>
-            <td>Post-Sales support</td>
-            <td>Edinburgh</td>
-            <td>46</td>
-            <td>2011/03/09</td>
-            <td>$324,050</td>
-        </tr>
-        <tr>
-            <td>36</td>
-            <td>Marketing Designer</td>
-            <td>San Francisco</td>
-            <td>47</td>
-            <td>2009/12/09</td>
-            <td>$85,675</td>
-        </tr>
-        <tr>
-            <td>37</td>
-            <td>Office Manager</td>
-            <td>San Francisco</td>
-            <td>51</td>
-            <td>2008/12/16</td>
-            <td>$164,500</td>
-        </tr>
-        <tr>
-            <td>38</td>
-            <td>Secretary</td>
-            <td>San Francisco</td>
-            <td>41</td>
-            <td>2010/02/12</td>
-            <td>$109,850</td>
-        </tr>
-        <tr>
-            <td>39</td>
-            <td>Financial Controller</td>
-            <td>San Francisco</td>
-            <td>62</td>
-            <td>2009/02/14</td>
-            <td>$452,500</td>
-        </tr>
-        <tr>
-            <td>40</td>
-            <td>Office Manager</td>
-            <td>London</td>
-            <td>37</td>
-            <td>2008/12/11</td>
-            <td>$136,200</td>
-        </tr>
-        <tr>
-            <td>41</td>
-            <td>Director</td>
-            <td>New York</td>
-            <td>65</td>
-            <td>2008/09/26</td>
-            <td>$645,750</td>
-        </tr>
-        <tr>
-            <td>42</td>
-            <td>Support Engineer</td>
-            <td>Singapore</td>
-            <td>64</td>
-            <td>2011/02/03</td>
-            <td>$234,500</td>
-        </tr>
-        <tr>
-            <td>43</td>
-            <td>Software Engineer</td>
-            <td>London</td>
-            <td>38</td>
-            <td>2011/05/03</td>
-            <td>$163,500</td>
-        </tr>
-        <tr>
-            <td>44</td>
-            <td>Support Engineer</td>
-            <td>Tokyo</td>
-            <td>37</td>
-            <td>2009/08/19</td>
-            <td>$139,575</td>
-        </tr>
-        <tr>
-            <td>45</td>
-            <td>Developer</td>
-            <td>New York</td>
-            <td>61</td>
-            <td>2013/08/11</td>
-            <td>$98,540</td>
-        </tr>
-        <tr>
-            <td>46</td>
-            <td>Support Engineer</td>
-            <td>San Francisco</td>
-            <td>47</td>
-            <td>2009/07/07</td>
-            <td>$87,500</td>
-        </tr>
-        <tr>
-            <td>47</td>
-            <td>Data Coordinator</td>
-            <td>Singapore</td>
-            <td>64</td>
-            <td>2012/04/09</td>
-            <td>$138,575</td>
-        </tr>
-        <tr>
-            <td>48</td>
-            <td>Software Engineer</td>
-            <td>New York</td>
-            <td>63</td>
-            <td>2010/01/04</td>
-            <td>$125,250</td>
-        </tr>
-        <tr>
-            <td>49</td>
-            <td>Software Engineer</td>
-            <td>San Francisco</td>
-            <td>56</td>
-            <td>2012/06/01</td>
-            <td>$115,000</td>
-        </tr>
-        <tr>
-            <td>50</td>
-            <td>Junior Javascript Developer</td>
-            <td>Edinburgh</td>
-            <td>43</td>
-            <td>2013/02/01</td>
-            <td>$75,650</td>
-        </tr>
-        <tr>
-            <td>51</td>
-            <td>Sales Assistant</td>
-            <td>New York</td>
-            <td>46</td>
-            <td>2011/12/06</td>
-            <td>$145,600</td>
-        </tr>
-        <tr>
-            <td>52</td>
-            <td>Regional Director</td>
-            <td>London</td>
-            <td>47</td>
-            <td>2011/03/21</td>
-            <td>$356,250</td>
-        </tr>
-        <tr>
-            <td>53</td>
-            <td>Systems Administrator</td>
-            <td>London</td>
-            <td>21</td>
-            <td>2009/02/27</td>
-            <td>$103,500</td>
-        </tr>
-        <tr>
-            <td>54</td>
-            <td>Developer</td>
-            <td>San Francisco</td>
-            <td>30</td>
-            <td>2010/07/14</td>
-            <td>$86,500</td>
-        </tr>
-        <tr>
-            <td>55</td>
-            <td>Regional Director</td>
-            <td>Edinburgh</td>
-            <td>51</td>
-            <td>2008/11/13</td>
-            <td>$183,000</td>
-        </tr>
-        <tr>
-            <td>56</td>
-            <td>Javascript Developer</td>
-            <td>Singapore</td>
-            <td>29</td>
-            <td>2011/06/27</td>
-            <td>$183,000</td>
-        </tr>
-        <tr>
-            <td>57</td>
-            <td>Customer Support</td>
-            <td>New York</td>
-            <td>27</td>
-            <td>2011/01/25</td>
-            <td>$112,000</td>
+
         </tr>
         </tbody>
     </table>

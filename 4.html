@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文档标题</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').dataTable( {
+                "columns": [
+                    { "width": "3.3%" },
+                    { "width": "5.5%" },
+                    { "width": "8.5%" },
+                    { "width": "10.0%" },
+                    { "width": "16.3%" },
+                    { "width": "10.7%" },
+                    { "width": "21.4%" },
+                    { "width": "9.3%" },
+                    { "width": "14.5%" }
+                ],
+                "searching": false,
+                "dom": '<"top"f>rt<"bottom"lip><"clear">',
+                "scrollY": "350px",
+                "scrollX": "false",
+                "autoWidth":"false",
+                "scrollCollapse": "true",
+                "paging": "false",
+                "language": {
+                    "lengthMenu": "每页 _MENU_ 条记录",
+                    "zeroRecords": "没有找到记录",
+                    "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                    "infoEmpty": "无记录",
+                    "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                    "sSearch":"查找",
+                    "oPaginate": {
+                        "sPrevious": "上页",
+                        "sNext": "下页"
+                    },
+                }, initComplete: function () {
+                    var api = this.api();
+                    api.columns().indexes().flatten().each( function ( i ) {
+                        var column = api.column( i );
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo( $(column.footer()).empty() )
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        } );
+                    } );
+                }
+            } );
+        } );
+    </script>
+</head>
+
+<body>
+<div class="platform" style="margin-top:20px;margin-left:40px;">
+<div class="myhead" style="padding-top: 20px;margin-bottom: 50px">
+    <div class="input-group" style="float:left;height: 25px;width: 225px;font-size: 15px;margin-right: 15px;">
+        <style>
+            body .input-group-addon{
+                background: #FFFFFF;
+                border-right: none;
+                padding: 0px;
+            }
+            body .form-control{
+                border-radius: 0px;
+                height: 25px;
+            }
+        </style>
+        <span class="input-group-addon"><img src="images/search.png" style="height: 16px;width: 16px"></span>
+        <input type="text" class="form-control" style="border-left:none;" placeholder="输入姓名">
+    </div>
+    <div style="float: left;">
+        <select id="c1" style="height: 25px;margin-right: 15px;font-size: 15px;color: rgb(117,117,117);">
+            <option   value="专项服务内容">专项服务内容</option>
+        </select>
+        <script>
+            !function(){
+                $('#c1').on('click',function(){
+                    top.layer.open({
+                        type: 2,
+                        title:'专项服务内容',
+                        area: ['500px', '300px'],
+                        content: 'reportType.html',
+                        maxmin: true,
+                        shadeClose:true,
+                        fixed:false,
+                        zIndex: layer.zIndex,
+                        closeBtn: 1
+                    });
+                });
+            }();
+        </script>
+    </div>
+    <div id="myButtons1" class="bs-example" style="float: left;">
+        <button type="button" class="btn btn-primary" style="height: 25px;padding: 0px;width: 54px">查找</button>
+    </div>
+    <div id="myButtons2" class="bs-example" style="float:right;">
+        <button id="new" type="button" style="margin-right:60px;height: 25px;padding: 0px;width: 138px" class="btn btn-primary" >新建服务专员信息</button>
+    </div>
+    <button id="ne1">查看变量</button>
+    <script>
+    !function(){
+    $('#new').on('click',function(){
+        var rel="ordinary";
+    layer.open({
+    type: 2,
+    title:'新建服务专员信息',
+    area: ['720px', '500px'],
+    content: 'newInfo2men.html',
+    maxmin: true,
+    shadeClose:true,
+    fixed:false,
+    zIndex: layer.zIndex,
+    closeBtn: 1
+    });
+    });
+        $('#ne1').on('click', function(){
+            alert(rel);
+        });
+    }();
+    function setRel(rel){
+        this.rel=rel;
+    }
+    function getRel(){
+        return rel;
+    }
+    </script>
+</div>
+    <div class="top"></div>
+    <table id="example" class="display table table-bordered table-striped table-hover dataTable" style="width:100%;" >
+        <thead style="background-color:#3e62a5;color:white;">
+        <tr>
+            <th style="text-align:center;">id</th>
+            <th style="text-align:center;">姓名</th>
+            <th style="text-align:center;">登录账号</th>
+            <th style="text-align:center;">手机号码</th>
+            <th style="text-align:center;">邮箱</th>
+            <th style="text-align:center;">微信号</th>
+            <th style="text-align:center;">专项服务内容</th>
+            <th style="text-align:center;">用户状态</th>
+            <th style="text-align:center;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td><a href="#" id="tup1">查看图片</a></td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>63</td><td>$170,750</td>
+            <td>2011/07/25</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Junior Technical Author</td>
+            <td>San Francisco</td>
+            <td>66</td><td>$86,000</td>
+            <td>2009/01/12</td>
+            <td>66</td><td>$86,000</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>22</td><td>$433,060</td>
+            <td>2012/03/29</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>33</td><td>$162,700</td>
+            <td>2008/11/28</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Integration Specialist</td>
+            <td>New York</td>
+            <td>61</td><td>$372,000</td>
+            <td>2012/12/02</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Sales Assistant</td>
+            <td>San Francisco</td>
+            <td>59</td><td>$137,500</td>
+            <td>2012/08/06</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Integration Specialist</td>
+            <td>Tokyo</td>
+            <td>55</td><td>$327,900</td>
+            <td>2010/10/14</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Javascript Developer</td>
+            <td>San Francisco</td>
+            <td>39</td><td>$205,500</td>
+            <td>2009/09/15</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Software Engineer</td>
+            <td>Edinburgh</td>
+            <td>23</td><td>$103,600</td>
+            <td>2008/12/13</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Office Manager</td>
+            <td>London</td>
+            <td>30</td><td>$90,560</td>
+            <td>2008/12/19</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Support Lead</td>
+            <td>Edinburgh</td>
+            <td>22</td><td>$342,000</td>
+            <td>2013/03/03</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Regional Director</td>
+            <td>San Francisco</td>
+            <td>36</td><td>$470,600</td>
+            <td>2008/10/16</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Senior Marketing Designer</td>
+            <td>London</td>
+            <td>43</td><td>$313,500</td>
+            <td>2012/12/18</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>Regional Director</td>
+            <td>London</td>
+            <td>19</td><td>$385,750</td>
+            <td>2010/03/17</td>
+            <td>$320,800</td>
+            <td>2011/04/25</td>
+            <td><a href="#">查看 </a><a href="#">编辑 </a><a href="#">删除</a> </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="bottom" ></div>
+    <div class="clear"></div>
+</div>
+</body>
+<style>
+    .dataTables_wrapper{width:974px;height:385px;}
+    .table{
+        margin-top:0px !important;
+        margin-left:20px;
+        line-height: 27px;
+        padding: 0px;}
+    .bottom{
+        vertical-align:baseline;
+    }
+    .dataTables_info{
+        position:absolute;
+        margin-left:160px;
+    }
+    .dataTables_length{
+        padding-top:10.6px;
+    }
+    #example>tbody>tr>td{
+        text-align: center;
+        line-height: 27px;
+        padding: 0px;
+    }
+    #example_length label{
+        font-weight: normal;
+    }
+</style>
+</html>

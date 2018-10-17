@@ -717,8 +717,8 @@
   background: #E0ECFF url('images/tabs_icons.png') no-repeat -15px center;
   }
 .tabs li a.tabs-close {
-  /*background: url('../images/close.png') no-repeat -34px center;*/
-  /*background-image: url('../images/close.png');*/
+  background: url('../images/close.png') no-repeat -34px center;
+  /*background-image: url('');*/
   }
 .tabs li a.tabs-inner:hover {
   background: #3e62a5;

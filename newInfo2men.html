@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新建服务专员信息</title>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reportType.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/reportType.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+    body .form-control{
+        height: 27px;
+        width: 320px;
+    }
+    body .btn{
+        height: 27px;
+        width: 197px;
+        padding: 0px;
+    }
+
+</style>
+<form>
+    <div style="margin-top: 50px">
+    <table style=" border-collapse:separate;border-spacing:18px;margin-left: 10%;">
+        <tr style="margin-bottom: 18px;">
+            <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 姓名</th>
+            <th><input type="text" class="form-control" id="myname"></th>
+        </tr>
+        <tr>
+            <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 登录账号</th>
+            <th><input type="text" class="form-control" id="account"></th>
+        </tr>
+        <tr>
+            <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 手机号码</th>
+            <th><input type="text" class="form-control" id="phone"></th>
+        </tr>
+        <tr>
+            <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 邮箱</th>
+            <th><input type="text" class="form-control" id="email"></th>
+        </tr>
+        <tr>
+            <th style="float: right;">&nbsp&nbsp 微信号</th>
+            <th><input type="text" class="form-control" id="wechat"></th>
+        </tr>
+        <tr>
+            <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 专项服务内容</th>
+            <th><button type="button" id="select" class="btn btn-primary">点击选择专项服务内容</button></th>
+        </tr>
+        <script>
+            !function(){
+                $('#select').on('click',function(){
+                    top.layer.open({
+                        type: 2,
+                        title:'服务专项内容',
+                        area: ['500px', '400px'],
+                        content: 'reportType.html',
+                        maxmin: true,
+                        shadeClose:true,
+                        fixed:false,
+                        zIndex: layer.zIndex,
+                        closeBtn: 1
+                    });
+                });
+            }();
+        </script>
+        <tr>
+            <th style="float: right;"><span style="color: red;">*</span>&nbsp&nbsp 是否启用</th>
+            <th><input type="checkbox" checked="checked"></th>
+        </tr>
+    </table>
+    <button type="button" onclick="myCheck();" id="ok" class="btn btn-primary" style="width: 123px;height: 38px;float: right;margin-right: 50px">保存</button>
+        <script>
+            function myCheck() {
+                if(document.getElementById('myname').value == "")
+                {
+                    alert('请输入姓名!');
+                    // return false;
+                }
+                else if(document.getElementById('account').value == "")
+                {
+                    alert('请输入登录账号!');
+                    return false;
+                }else  if(document.getElementById('phone').value == "")
+                {
+                    alert('请输入手机号码!');
+                    return false;
+                }else  if(document.getElementById('email').value == "")
+                {
+                    alert('请输入邮箱号码!');
+                    return false;
+                }
+                else{
+                    $(function(){
+                        var str=window.location.href;
+                        $('myname').val(str.split('?')[1]);
+
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.setRel(document.getElementById('myname').value);
+                            parent.layer.close(index);
+
+
+                    });
+                }
+
+
+            }
+
+            // $(function(){
+            //     var str=window.location.href;
+            //     $("#myname").val(str.split('?')[1]);
+            //     $('#ok').on('click', function(){
+            //         var index = parent.layer.getFrameIndex(window.name);
+            //         parent.setRel(document.getElementById('myname').value);
+            //         parent.layer.close(index);
+            //
+            //     });
+            // });
+        </script>
+</div>
+</form>
+</body>
+</html>

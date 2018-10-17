@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>举报类型</title>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reportType.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/reportType.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="layer/layer.js"></script>
+</head>
+<body>
+<div class="table1" style="width: 346px;height:550px;float: left;overflow-x: scroll;border-right: 1px solid #cccccc">
+    <div style="margin-top: 10px;margin-right:20px;margin-bottom: 50px;">
+        <h1 style="color: #3e62a5;font-size: 21px;float: left;margin: 0px">所有保护项目</h1>
+        <span id="add" style="background-color: #3e62a5;float: right;"><img style="height: 22px;width: 22px;" src="images/add.png"> </span>
+    </div>
+    <script>
+        !function(){
+            $('#add').on('click',function(){
+                layer.open({
+                    type: 2,
+                    title:'新建保护项目信息',
+                    area: ['600px', '250px'],
+                    content: 'addInfo.html',
+                    maxmin: true,
+                    shadeClose:true,
+                    fixed:false,
+                    zIndex: layer.zIndex,
+                    closeBtn: 1
+                });
+            });
+        }();
+    </script>
+    <table style="width: auto">
+        <tr>
+            <td id="d1">
+                <div style="float: left;"  onclick="mi1();">
+                    <img src="images/fang.png" id="i1"  style="width: 20px;height: 20px;float: left;"><div id="wdm1"  style="display: inline">世界军人运动会专项知识产权保护类</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d11">
+                <div style="float: left;margin-left: 40px;" onclick="mi11()" >
+                    <img src="images/shou.png" id="i11"  style="width: 20px;height: 20px;float: left;"><div id="myTitle" style="display: inline">名称类</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d12" >
+                <div style="float: left;margin-left: 40px;" onclick="mi12()">
+                    <img src="images/fang.png" id="i12"  style="width: 20px;height: 20px;float: left;"><div id="miniTitle" style="display: inline">缩写类</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d121" >
+                <div style="word-break: keep-all;float: left;margin-left: 80px;" onclick="mi121();">
+                    <div id="elseSymbol" style="display: inline">其他世界军人运动会专有表达词汇缩写符号</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d13">
+                <div style="float: left;margin-left: 40px;" onclick="mi13()">
+                    <img src="images/shou.png" id="i13"  style="width: 20px;height: 20px;float: left;"><div id="motto" style="display: inline">格言/口号类</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d14">
+                <div style="float: left;margin-left: 40px;" onclick="mi14()">
+                    <img src="images/shou.png" id="i14"  style="width: 20px;height: 20px;float: left;"><div id="internet" style="display: inline">网络知识产权类</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d15">
+                <div style="float: left;margin-left: 40px;" onclick="mi15()">
+                    <img src="images/shou.png" id="i15"  style="width: 20px;height: 20px;float: left;"><div id="elseStyle" style="display: inline">其他</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d16">
+                <div style="float: left;margin-left: 40px;" onclick="mi16()">
+                    <img src="images/shou.png" id="i16"  style="width: 20px;height: 20px;float: left;"><div id="identification" style="display: inline">标志/标识类</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="d2">
+                <div style="float: left;" onclick="mi2()">
+                    <img src="images/shou.png" id="i2"  style="width: 20px;height: 20px;float: left;"><div id="wdm2" style="display: inline">一般知识产权保护类</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="margin-top: 50px;">
+<div class="table2" style="float: left;margin-left: 50px">
+    <div style="margin-top: 10px;margin-right:50px;margin-bottom: 50px;">
+        <h1 style="color: #3e62a5;font-size: 21px;float: left;margin: 0px">编辑保护项目信息</h1>
+    </div>
+    <table style=" border-collapse:separate;border-spacing:18px;margin-top:50px;font-size: 17px;">
+        <tr style="margin-bottom: 18px;">
+            <th style="float: right;font-weight: normal"><span style="color: red;">*</span>&nbsp&nbsp 保护项目名称</th>
+            <th><input type="text" class="form-control" id="pname" style="width: 320px;height: 28px"></th>
+        </tr>
+        <tr>
+            <th style="float: right;font-weight: normal"><span style="color: red;">*</span>&nbsp&nbsp 是否启用</th>
+            <th><input type="checkbox" checked="checked"></th>
+        </tr>
+    </table>
+    <div style="margin-top: 40px">
+        <div id="myButtons2" class="bs-example" style="float: right;">
+            <button type="button" id="protect" onclick="protect();" class="btn btn-primary" style="width:95px;height:35px;padding: 0px;">保存</button>
+        </div>
+        <div id="myButtons1" class="bs-example" style="float: right;">
+            <button type="button" onclick="cancel();" class="btn btn-primary" style="width:95px;height: 35px;padding: 0px;margin-right:20px;background-color: #FFFFFF;color: black">取消</button>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+   var t=0;
+    function mi1() {
+        document.getElementById('pname').value = document.getElementById('wdm1').innerHTML;
+       t=1;
+    }
+    function mi11() {
+        document.getElementById('pname').value = document.getElementById('myTitle').innerHTML;
+        t=2;
+    }
+    function mi12() {
+        document.getElementById('pname').value = document.getElementById('miniTitle').innerHTML;
+        t=3;
+    }
+    function mi121() {
+        document.getElementById('pname').value =document.getElementById('elseSymbol').innerHTML;
+        t=4;
+    }
+    function mi13() {
+        document.getElementById('pname').value = document.getElementById('motto').innerHTML;
+        t=5;
+    }
+    function mi14() {
+        document.getElementById('pname').value = document.getElementById('internet').innerHTML;
+        t=6;
+    }
+    function mi15() {
+        document.getElementById('pname').value = document.getElementById('elseStyle').innerHTML;
+        t=7;
+    }
+    function mi16() {
+        document.getElementById('pname').value =document.getElementById('identification').innerHTML;
+        t=8;
+    }
+    function mi2() {
+        document.getElementById('pname').value = document.getElementById('wdm2').innerHTML;
+        t=9;
+    }
+    function cancel() {
+        document.getElementById('pname').value = "";
+        if(t===1){
+            document.getElementById('wdm1').innerText="世界军人运动会专项知识产权保护类";
+        }
+        if(t===2){
+            document.getElementById('myTitle').innerText="名称类";
+        }
+        if(t===3){
+            document.getElementById('miniTitle').innerText="缩写类";
+        }
+        if(t===4){
+            document.getElementById('elseSymbol').innerText="其他世界军人运动会专有表达词汇缩写符号";
+        }
+        if(t===5){
+            document.getElementById('motto').innerText="格言/口号类";
+        }
+        if(t===6){
+            document.getElementById('internet').innerText="网络知识产权类";
+        }
+        if(t===7){
+            document.getElementById('elseStyle').innerText="其他";
+        }
+        if(t===8){
+            document.getElementById('identification').innerText="标志/标识类";
+        }
+        if(t===9){
+            document.getElementById('wdm2').innerText="一般知识产权保护类";
+        }
+    }
+
+    function protect() {
+        if(t===1){
+            document.getElementById('wdm1').innerText=document.getElementById('pname').value;
+        }
+        if(t===2){
+            document.getElementById('myTitle').innerText=document.getElementById('pname').value;
+        }
+        if(t===3){
+            document.getElementById('miniTitle').innerText=document.getElementById('pname').value;
+        }
+        if(t===4){
+            document.getElementById('elseSymbol').innerText=document.getElementById('pname').value;
+        }
+        if(t===5){
+            document.getElementById('motto').innerText=document.getElementById('pname').value;
+        }
+        if(t===6){
+            document.getElementById('internet').innerText=document.getElementById('pname').value;
+        }
+        if(t===7){
+            document.getElementById('elseStyle').innerText=document.getElementById('pname').value;
+        }
+        if(t===8){
+            document.getElementById('identification').innerText=document.getElementById('pname').value;
+        }
+        if(t===9){
+            document.getElementById('wdm2').innerText=document.getElementById('pname').value;
+        }
+    }
+</script>
+</body>
+</html>

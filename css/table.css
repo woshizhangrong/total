@@ -7,7 +7,7 @@ thead {
 	margin-left: 40px;
 	width: 95%;
 	border-radius:13px;
-	height: 90%;
+	height: 580px;
 	position:absolute;
 }
 .title{
@@ -63,6 +63,7 @@ thead {
 	background-color: #dedede;
 	color:#3e625a;
 }
+div.tab-panels{height: 95%;}
 .tab_body {
 	display: none;
 }
@@ -77,4 +78,6 @@ thead {
 	color:#3e625a;
 	width: 255px;
 }
-
+div.panel-body.panel-body-noheader.panel-body-noborder>iframe{
+    height: 550px !important;
+}

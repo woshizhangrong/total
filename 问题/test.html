@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="css/normalize3.0.2.min.css" />
+    <link href="css/mobiscroll.css" rel="stylesheet" />
+    <link href="css/mobiscroll_date.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/layer.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <p id="parentIframe">哈哈</p>
+    <button onclick="c1()" id="ne1">查看变量</button>
+    <button onclick="c2()" id="ne">打开iframe</button>
+<!--     <script type="text/javascript">
+        var rel="原始变量";
+        $(function(){
+            $('#ne').on('click', function(){
+                layer.open({
+                    type: 2,
+                    area: ['500px', '300px'],
+                    maxmin: true,
+                    content: 'f.html'
+                });
+            });
+            $('#ne1').on('click', function(){
+                alert(rel);
+            });
+        });
+        function setRel(rel){
+            this.rel=rel;
+        }
+        function getRel(){
+            return rel;
+        }
+		</script> -->
+		<script>
+		var t=0
+		function c1(){
+		t=2;}
+		function c2(){
+		alert("change"+t)
+		}
+		alert(t);
+    </script>
+</body>
+</html>

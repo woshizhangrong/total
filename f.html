@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="css/normalize3.0.2.min.css" />
+    <link href="css/mobiscroll.css" rel="stylesheet" />
+    <link href="css/mobiscroll_date.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/layer.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="layer/layer.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+  <p><input id="name"><button id="new1">改变父类元素</button></p> 
+  <button id="new">关闭iframe</button>
+
+  <script type="text/javascript" src="layer/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="layer/layer.js"></script>
+  <script>
+    $(function(){
+      var str=window.location.href;
+      $("#name").val(str.split('?')[1]);
+      $('#new').on('click', function(){
+        var index = parent.layer.getFrameIndex(window.name); 
+        parent.setRel("子类传值");
+        parent.layer.close(index);
+
+      });
+      $('#new1').on('click', function(){
+        parent.$('#parentIframe').text($("#name").val());
+      });
+    });
+  </script>
+</body>
+</html>
